@@ -1,0 +1,127 @@
+@keyframes heart-bump {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.3);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  animation: heart-bump 1.5s infinite ease-in-out;
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for heart */
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Question {
+  color: white;
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.Button-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 40px;
+  position: relative;
+}
+
+/* Yes Button */
+.Yes-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  position: relative;
+}
+
+.Yes-btn:hover {
+  background-color: #45a049;
+}
+
+/* No Button */
+.No-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  position: relative;
+}
+
+.No-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Moving Effect for No Button */
+.moving-no {
+  transition: transform 0.7s ease-in-out;
+}
+
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
