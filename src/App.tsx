@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import heartLogo from "./heart.svg";
 import heartHappyLogo from "./hearthappy.svg"; // New happy heart image
+import confetti from "canvas-confetti";
+
 import "./App.css";
 
 function App() {
@@ -61,6 +63,12 @@ function App() {
 
   const handleYesClick = () => {
     setAccepted(true);
+    // Trigger confetti when "Yes" is clicked
+    confetti({
+      particleCount: 200,
+      spread: 180,
+      origin: { x: 0.5, y: 0.5 }
+    });
   };
 
   return (
