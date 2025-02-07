@@ -147,3 +147,18 @@ button {
     outline-offset: -4px;
   }
 }
+
+/* Hide hover interactions or change UI for mobile */
+.mobile .hover-message {
+  display: block;
+  color: red; /* Or use any other styling */
+}
+
+/* Hide hover effects or make adjustments for mobile */
+.mobile .button-container button:hover {
+  pointer-events: none; /* Disables hover */
+}
+
+.desktop .hover-message {
+  display: none;
+}

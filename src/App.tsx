@@ -12,6 +12,9 @@ function App() {
   const noButtonRef = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
+  // Check if the user is on a mobile device
+  const isMobile = window.innerWidth <= 768;  // You can adjust the width as needed
+
   useEffect(() => {
     if (noButtonRef.current) {
       const rect = noButtonRef.current.getBoundingClientRect();
@@ -73,6 +76,11 @@ function App() {
 
   return (
     <div className="App">
+      {isMobile && (
+        <div className="mobile-warning">
+          <p>This website works best on desktop. Please visit on a desktop for the best experience!</p>
+        </div>
+      )}
       <header className="App-header">
         {/* Change heart image when "Yes" is clicked, with fade-in effect */}
         <img
