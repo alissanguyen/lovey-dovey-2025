@@ -31,18 +31,22 @@ function App() {
       let maxAttempts = 50;
       let attempts = 0;
 
+      // Adjust for mobile: Use document.clientWidth/Height for better mobile compatibility
+      const maxWidth = isMobile ? document.documentElement.clientWidth : window.innerWidth;
+      const maxHeight = isMobile ? document.documentElement.clientHeight : window.innerHeight;
+
       do {
         // Ensure the "No" button moves at least 200px away from its current position
         x = position.x + (Math.random() * 400 - 200); // Move in a range of 400px
         y = position.y + (Math.random() * 400 - 200);
 
         // Keep the button inside screen bounds
-        x = Math.max(50, Math.min(x, window.innerWidth - buttonWidth - 50));
-        y = Math.max(50, Math.min(y, window.innerHeight - buttonHeight - 50));
+        x = Math.max(50, Math.min(x, maxWidth - buttonWidth - 50));
+        y = Math.max(50, Math.min(y, maxHeight - buttonHeight - 50));
 
         attempts++;
       } while (
-        (x < 0 || x > window.innerWidth - buttonWidth || y < 0 || y > window.innerHeight - buttonHeight) &&
+        (x < 0 || x > maxWidth - buttonWidth || y < 0 || y > maxHeight - buttonHeight) &&
         attempts < maxAttempts
       );
 
@@ -87,7 +91,7 @@ function App() {
           alt="heart icon"
         />
         {/* Change text when "Yes" is clicked */}
-        <span className="Question">{accepted ? "Yay! 🎉" : "Will you be my Valentine? 💖"}</span>
+        <span className="Question silkscreen-regular">{accepted ? "Yay! 🎉" : "Will you be my Valentine? 💖"}</span>
         {!accepted && ( // Hide buttons after clicking "Yes"
           <div className="Button-container">
             <button
@@ -102,7 +106,7 @@ function App() {
               className={isSwapped ? "Yes-btn" : "No-btn"}
               onMouseEnter={hoverCount === 1 ? undefined : handleNoHover}
               onClick={isSwapped && !isMobile ? handleYesClick : undefined} 
-              onTouchStart={handleNoHover} // Handle tap on mobile
+              onTouchStart={hoverCount === 1 ? handleYesClick : handleNoHover} // Handle tap on mobile
             >
               {isSwapped ? "Yes" : "No"}
             </button>
