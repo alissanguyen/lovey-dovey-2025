@@ -19,9 +19,6 @@ function App() {
     if (noButtonRef.current) {
       const rect = noButtonRef.current.getBoundingClientRect();
       setPosition({ x: rect.left, y: rect.top });
-
-      // Set fixed positioning to prevent weird behavior
-      // noButtonRef.current.style.position = "fixed";
     }
   }, []);
 
@@ -55,15 +52,7 @@ function App() {
     }
   };
 
-  const handleNoHover = () => {
-    if (hoverCount < 2) {
-      setIsSwapped((prev) => !prev);
-      setHoverCount(hoverCount + 1);
-    } else {
-      requestAnimationFrame(moveNoButtonSmoothly);
-    }
-  };
-
+  // Handle "Yes" click action
   const handleYesClick = () => {
     setAccepted(true);
     // Trigger confetti when "Yes" is clicked
@@ -72,6 +61,15 @@ function App() {
       spread: 180,
       origin: { x: 0.5, y: 0.5 }
     });
+  };
+
+  const handleNoHover = () => {
+    if (hoverCount < 2) {
+      setIsSwapped((prev) => !prev);
+      setHoverCount(hoverCount + 1);
+    } else {
+      requestAnimationFrame(moveNoButtonSmoothly);
+    }
   };
 
   return (
@@ -95,15 +93,16 @@ function App() {
             <button
               className={isSwapped ? "No-btn" : "Yes-btn"}
               onMouseEnter={isSwapped ? handleNoHover : undefined}
-              onClick={handleYesClick} // Handle "Yes" click
+              onClick={isSwapped ? undefined : handleYesClick} // Handle "Yes" click
             >
               {isSwapped ? "No" : "Yes"}
             </button>
             <button
               ref={noButtonRef}
               className={isSwapped ? "Yes-btn" : "No-btn"}
-              onMouseEnter={hoverCount === 1 ? undefined: handleNoHover}
-              onClick={isSwapped ? handleYesClick : undefined} 
+              onMouseEnter={hoverCount === 1 ? undefined : handleNoHover}
+              onClick={isSwapped && !isMobile ? handleYesClick : undefined} 
+              onTouchStart={handleNoHover} // Handle tap on mobile
             >
               {isSwapped ? "Yes" : "No"}
             </button>
